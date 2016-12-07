@@ -84,16 +84,25 @@
 
 
 
-<meta name="description" content="刚刚搭建成功，有点小激动有没有">
+<meta name="description" content="码字不易，转载请注明出处。
+前言iOS常用的持续集成工具有Jenkins、Travis CI、Xcode server等，当然我们选择最简单的Xcode server。
+OS X server中集成了git版本管理功能，Xcode server持续集成服务，还有wiki知识库管理等，你甚至还可以拿它搭建一个网站服务器。
+在持续集成过程中你可以直接使用os x server 的git版本管理功能，将">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS hello world">
-<meta property="og:url" content="http://yoursite.com/2016/12/06/iOS-hello-world/index.html">
+<meta property="og:title" content="iOS 持续集成（一）">
+<meta property="og:url" content="http://yoursite.com/2016/12/07/iOS-持续集成（一）/index.html">
 <meta property="og:site_name" content="田鹏涛的博客">
-<meta property="og:description" content="刚刚搭建成功，有点小激动有没有">
-<meta property="og:updated_time" content="2016-12-06T10:22:44.000Z">
+<meta property="og:description" content="码字不易，转载请注明出处。
+前言iOS常用的持续集成工具有Jenkins、Travis CI、Xcode server等，当然我们选择最简单的Xcode server。
+OS X server中集成了git版本管理功能，Xcode server持续集成服务，还有wiki知识库管理等，你甚至还可以拿它搭建一个网站服务器。
+在持续集成过程中你可以直接使用os x server 的git版本管理功能，将">
+<meta property="og:updated_time" content="2016-12-07T06:49:15.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS hello world">
-<meta name="twitter:description" content="刚刚搭建成功，有点小激动有没有">
+<meta name="twitter:title" content="iOS 持续集成（一）">
+<meta name="twitter:description" content="码字不易，转载请注明出处。
+前言iOS常用的持续集成工具有Jenkins、Travis CI、Xcode server等，当然我们选择最简单的Xcode server。
+OS X server中集成了git版本管理功能，Xcode server持续集成服务，还有wiki知识库管理等，你甚至还可以拿它搭建一个网站服务器。
+在持续集成过程中你可以直接使用os x server 的git版本管理功能，将">
 
 
 
@@ -121,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/12/06/iOS-hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/12/07/iOS-持续集成（一）/"/>
 
 
 
 
 
-  <title> iOS hello world | 田鹏涛的博客 </title>
+  <title> iOS 持续集成（一） | 田鹏涛的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -248,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/06/iOS-hello-world/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/07/iOS-持续集成（一）/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="田鹏涛">
@@ -272,7 +281,7 @@
             
             
               
-                iOS hello world
+                iOS 持续集成（一）
               
             
           </h1>
@@ -285,8 +294,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-06T18:11:29+08:00">
-                2016-12-06
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-07T14:48:33+08:00">
+                2016-12-07
               </time>
             
 
@@ -321,7 +330,54 @@
       
 
       
-        <p>刚刚搭建成功，有点小激动有没有</p>
+        <p>码字不易，转载请注明出处。</p>
+<p>前言<br>iOS常用的持续集成工具有Jenkins、Travis CI、Xcode server等，当然我们选择最简单的Xcode server。</p>
+<p>OS X server中集成了git版本管理功能，Xcode server持续集成服务，还有wiki知识库管理等，你甚至还可以拿它搭建一个网站服务器。</p>
+<p>在持续集成过程中你可以直接使用os x server 的git版本管理功能，将代码提交至自己搭建的OS X server服务器。也可以将代码提交至其他git版本管理仓库中(比如GitHub)。</p>
+<p>设备<br>一台Git服务器，可以用GitHub、oschina等。</p>
+<p>一台装OS X Server的服务器，必须为MAC，下文简称 Xcode Server服务器。</p>
+<p>若干MAC做客户端，下文简称客户端。</p>
+<p>若干台iOS测试机。</p>
+<p>一、配置Xcode Server服务器<br>1、apple给开发者可以凭开发者账号免费兑换os x server。免费兑换地址</p>
+<p><a href="https://developer.apple.com/osx/download/" target="_blank" rel="external">https://developer.apple.com/osx/download/</a></p>
+<p>2、下载os x server后点击安装。</p>
+<p>3、打开 Server 应用，以查看 OS X Server 中提供的服务列表。选择“Xcode”。</p>
+<p>点按“选取 Xcode”按钮，然后在“应用程序”文件夹中选择“Xcode”。Xcode 服务将自动启动。</p>
+<p>4、开发者团队</p>
+<p>在此处千万不要添加开发者账号</p>
+<p>5、添加git存储库，如果用Github、oschina或者自己搭建的git服务器则不需要此步骤。</p>
+<p>Xcode 服务 Bot 将从源 Git 储存库访问项目和代码。</p>
+<p>点按“储存库”，然后点按 添加按钮。选取 Git 储存库的名称，然后点按“创建”。</p>
+<p>储存库的 URL 基于服务器主机名称和储存库名称。例如，储存库的 URL 将为 <a href="https://myserver.example.com/git/Mac_Calc.git。" target="_blank" rel="external">https://myserver.example.com/git/Mac_Calc.git。</a></p>
+<p>二、配置Xcode客户端，创建bot<br>1、打开xcode&gt;product&gt;create bot</p>
+<p>2、填写bot名称，选择Xcode Server服务器</p>
+<p>3、Actions：选择执行的动作</p>
+<p>   a、对代码进行静态分析</p>
+<p>   b、对代码进行单元测试</p>
+<p>   c、生成archive包（可以选择是否生成用户安装包）</p>
+<p>4、cleaning：选择在何时清理项目，有几个选项（总是、每天、每周、从不）</p>
+<p>5、configuration：选择编译配置（Debug、release）</p>
+<p>6、选择在何时Xcode Server服务器开始持续集成，有几个选项（定时、在有新代码提交时、手动）</p>
+<p>7、Before Integration 在开始持续集成前执行的脚本</p>
+<p>8、 After Integration在持续集成后执行的脚本</p>
+<p>9、至此，创建bot完成</p>
+<p>三、Xcode Server服务器证书配置</p>
+<p>1、配置Certificates</p>
+<p>打开钥匙串，将iPhone Developer: xxx和iPhone Distribution:xxx导出为.p12文件</p>
+<p>将导出的.p12文件 导入装OS X Server的MAC的钥匙串中，这次需导入到钥匙串系统中，而不是登录中</p>
+<p>持续集成生成包时证书由/usr/bin/codesign管理，所以需将codesign添加为允许访问证书的程序</p>
+<p>在显示简介中选择 访问控制 &gt;始终通过这些应用程序访问 中点击加号，开始选择/usr/bin/codesign程序。选择完成后点击确认。由于usr是隐藏文件，在选择时使用快捷键 CMD+SHIFT+. 显示隐藏文件</p>
+<p>按照以上步骤将iPhone Distribution:xxx的访问控制，也添加/usr/bin/codesign程序。</p>
+<p>2、将Provisioning Profiles拷贝到Xcode Server</p>
+<p>Xcode客户端描述文件保存在以下文件夹中</p>
+<p>User/Library/MobileDevice/ProvisioningProfiles</p>
+<p>Xcode Server服务器描述文件保存在以下文件夹中</p>
+<p>/Library/Developer/XcodeServer/ProvisioningProfiles</p>
+<p>将Xcode客户端路径下的证书保存至Xcode Server服务器对应路径下</p>
+<p>3、在上传代码到仓库时需选择正确的证书和描述文件，如下图</p>
+<p>四、开始持续集成<br>点击integrate开始持续集成</p>
+<p>正常情况等待几分钟会看到下面的界面，说明持续集成完成。可以将ipa包安装到手机，也可以将Archive上传到appStore。当然也可以直接用iPhone Safari访问xcode server进行安装。</p>
+<p>iOS Xcode server 持续集成（二）集成后ipa包自动上传蒲公英 集成前执行pod install</p>
 
       
     </div>
@@ -357,6 +413,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/07/iOS多线程编程理解-GCD/" rel="prev" title="iOS多线程编程理解-GCD">
+                iOS多线程编程理解-GCD <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -415,13 +475,20 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
 
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
           
 
         </nav>

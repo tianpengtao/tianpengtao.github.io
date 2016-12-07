@@ -94,7 +94,7 @@
 <meta property="og:description" content="####创建队列
 创建串行队列12dispatch_queue_t queue2 =dispatch_queue_create(&amp;quot;com.quanya.queue&amp;quot;, DISPATCH_QUEUE_SERIAL);
 创建并行队列12dispatch_queue_t queue2 =dispatch_queue_create(&amp;quot;com.quanya.queue&amp;quot">
-<meta property="og:updated_time" content="2016-12-07T08:32:55.000Z">
+<meta property="og:updated_time" content="2016-12-07T08:58:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS多线程编程理解-GCD">
 <meta name="twitter:description" content="####创建队列
@@ -216,6 +216,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
@@ -331,6 +341,7 @@
 <p>创建串行队列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dispatch_queue_t queue2 =</div><div class="line">dispatch_queue_create(&quot;com.quanya.queue&quot;, DISPATCH_QUEUE_SERIAL);</div></pre></td></tr></table></figure></p>
 <p>创建并行队列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dispatch_queue_t queue2 =</div><div class="line">dispatch_queue_create(&quot;com.quanya.queue&quot;, DISPATCH_QUEUE_CONCURRENT);</div></pre></td></tr></table></figure></p>
 <p>获取全局队列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dispatch_queue_t queue2 = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <p>####系统提供dispatch方法</p>
 <p>创建异步任务，不阻塞当前线程，后台执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">dispatch_async(queue3, ^&#123;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure></p>
 <p>创建同步任务，阻塞当前线程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dispatch_sync(queue1, ^&#123;</div><div class="line">            &#125;);</div></pre></td></tr></table></figure></p>
@@ -459,10 +470,10 @@
 
           
             <div class="site-state-item site-state-tags">
-              
+              <a href="/tags">
                 <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -471,6 +482,26 @@
         
 
         <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/tianpengtao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/2e33ff1e028e/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
           
         </div>
 

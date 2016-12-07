@@ -211,6 +211,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
@@ -326,51 +336,19 @@
 
       
         
-          
-            <blockquote>
+          <blockquote>
 <p>在微信运动、QQ健康等泛滥的年代，我们公司也终于要搞一个计步器，特此记录。</p>
 </blockquote>
 <p>对于使用了M7或者M8处理器的设备（iPhone5s、iPhone6、iPhone6 Plus、iPhone6s、iPhone6s Plus、），Core Motion框架支持了一些预置的motion动作，比如步数、爬楼还有移动类型(行走、骑行等等)。</p>
 <p>所以计步器的开发其实很简单，我们只需要用Core Motion框架就可以直接从设备读取监测了。当然我们还可以用HealthKit进行开发，在这里我们不进行详细的介绍。</p>
 <p>Core Motion中的CMStepCounter和CMPedometer是我们今天的重点。</p>
-<h2 id="CMPedometer"><a href="#CMPedometer" class="headerlink" title="CMPedometer"></a>CMPedometer</h2><hr>
-<p>在iOS8及其以上系统中我们可以使用CMPedometer类获取行走相关信息（步数、距离、上楼、下楼、当前速度等）。</p>
-<p>当前设备是否可以获取步数</p>
-<ul>
-<li>(BOOL)isStepCountingAvailable;<br>当前设备是否可以获取距离</li>
-<li>(BOOL)isDistanceAvailable;<br>当前设备是否可以获取上下楼层数</li>
-<li>(BOOL)isFloorCountingAvailable;<br>当前设备是否可以获取速度（s/m）</li>
-<li>(BOOL)isPaceAvailable<br>当前设备是否可以获取节奏</li>
-<li>(BOOL)isCadenceAvailable<br>根据开始和结束时间查询行走相关信息</li>
-</ul>
-<ul>
-<li>(void)queryPedometerDataFromDate:(NSDate <em>)start<br>toDate:(NSDate </em>)end<br>withHandler:(CMPedometerHandler)handler;<br>从某一时刻开始监测步数变化</li>
-<li>(void)startPedometerUpdatesFromDate:(NSDate *)start<br>withHandler:(CMPedometerHandler)handler;<br>停止监测步数变化</li>
-<li>(void)stopPedometerUpdates;</li>
-</ul>
-<h2 id="CMStepCounter"><a href="#CMStepCounter" class="headerlink" title="CMStepCounter"></a>CMStepCounter</h2><hr>
-<p>在iOS7中我们只能使用CMStepCounter类获取步数，并且仅能够获取步数。</p>
-<p>判断步数统计是否有效</p>
-<ul>
-<li>(BOOL)isStepCountingAvailable;</li>
-</ul>
-<p>根据开始和结束时间查询步数</p>
-<ul>
-<li>(void)queryStepCountStartingFrom:(NSDate <em>)start<br>to:(NSDate </em>)end<br>toQueue:(NSOperationQueue *)queue<br>withHandler:(CMStepQueryHandler)handler;</li>
-</ul>
-<p>开始断监测步数变化</p>
-<ul>
-<li>(void)startStepCountingUpdatesToQueue:(NSOperationQueue *)queue<br>updateOn:(NSInteger)stepCounts<br>withHandler:(CMStepUpdateHandler)handler;</li>
-</ul>
-<p>停止监测步数变化</p>
-<ul>
-<li>(void)stopStepCountingUpdates;</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><hr>
-<p>综上我们可以看出CMPedometer类可以获取的运动信息更加详细。而CMStepCounter类仅能够获取步数。我们在使用中需要判断系统版本使用不同的类获取行走信息。</p>
-<p>我对CMPedometer 和CMStepCounter做了简单封装，使得你只需要一行代码就可以获取及监测行走信息。  <a href="https://github.com/tianpengtao/Pedometer.git" target="_blank" rel="external">代码奉上</a></p>
-
-          
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/12/07/iOS-计步器开发/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -484,29 +462,17 @@
 
       
         
-          
-            <p>####创建队列</p>
+          <p>####创建队列</p>
 <p>创建串行队列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dispatch_queue_t queue2 =</div><div class="line">dispatch_queue_create(&quot;com.quanya.queue&quot;, DISPATCH_QUEUE_SERIAL);</div></pre></td></tr></table></figure></p>
 <p>创建并行队列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dispatch_queue_t queue2 =</div><div class="line">dispatch_queue_create(&quot;com.quanya.queue&quot;, DISPATCH_QUEUE_CONCURRENT);</div></pre></td></tr></table></figure></p>
 <p>获取全局队列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dispatch_queue_t queue2 = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)</div></pre></td></tr></table></figure></p>
-<p>####系统提供dispatch方法</p>
-<p>创建异步任务，不阻塞当前线程，后台执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">dispatch_async(queue3, ^&#123;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure></p>
-<p>创建同步任务，阻塞当前线程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dispatch_sync(queue1, ^&#123;</div><div class="line">            &#125;);</div></pre></td></tr></table></figure></p>
-<p>主线程执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>一次性执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">static dispatch_once_t onceToken;</div><div class="line">dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p> 延迟 2 秒执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">double delayInSeconds = 2.0;</div><div class="line">dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);</div><div class="line">dispatch_after(popTime, dispatch_get_main_queue(), ^(void)&#123;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>创建队列组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dispatch_group_t group = dispatch_group_create();</div></pre></td></tr></table></figure></p>
-<p>####例子<br>eg.1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//创建串行队列</div><div class="line">dispatch_queue_t queue2 =</div><div class="line">dispatch_queue_create(&quot;com.quanya.queue&quot;, DISPATCH_QUEUE_SERIAL);</div><div class="line">//创建异步任务，不阻塞当前线程</div><div class="line">dispatch_async(queue2, ^&#123;</div><div class="line">    for (int i=0; i&lt;=100; i++) &#123;</div><div class="line">        NSLog(@&quot;_______%d&quot;,i);</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line">        NSLog(@&quot;aaaaa&quot;);</div><div class="line">//创建异步任务，不阻塞当前线程</div><div class="line">dispatch_async(queue2, ^&#123;</div><div class="line">    for (int i=101; i&lt;=200; i++) &#123;</div><div class="line">        NSLog(@&quot;_______%d&quot;,i);</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line">NSLog(@&quot;bbbbb&quot;);</div></pre></td></tr></table></figure></p>
-<p>打印结果如下，由打印结果可以看出dispatch_async没有阻塞当前线程，会另开一个线程。而串行队列queue2则会保证，在另一个线程中的任务顺序执行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">2016-09-19 10:11:21.090 ThreadTest[3142:78551] _______0</div><div class="line">2016-09-19 10:11:21.089 ThreadTest[3142:78508] aaaaa</div><div class="line">2016-09-19 10:11:21.091 ThreadTest[3142:78508] bbbbb</div><div class="line">2016-09-19 10:11:21.091 ThreadTest[3142:78551] _______1</div><div class="line">2016-09-19 10:11:21.092 ThreadTest[3142:78551] _______2</div><div class="line">2016-09-19 10:11:21.093 ThreadTest[3142:78551] _______3</div><div class="line">2016-09-19 10:11:21.094 ThreadTest[3142:78551] _______4</div><div class="line">2016-09-19 10:11:21.094 ThreadTest[3142:78551] _______5</div><div class="line">2016-09-19 10:11:21.094 ThreadTest[3142:78551] _______6</div><div class="line">2016-09-19 10:11:21.095 ThreadTest[3142:78551] _______7</div><div class="line">2016-09-19 10:11:21.095 ThreadTest[3142:78551] _______8</div><div class="line">2016-09-19 10:11:21.095 ThreadTest[3142:78551] _______9</div><div class="line">2016-09-19 10:11:21.096 ThreadTest[3142:78551] _______10</div><div class="line">2016-09-19 10:11:21.096 ThreadTest[3142:78551] _______11</div><div class="line">2016-09-19 10:11:21.096 ThreadTest[3142:78551] _______12</div><div class="line">2016-09-19 10:11:21.096 ThreadTest[3142:78551] _______13</div><div class="line">2016-09-19 10:11:21.097 ThreadTest[3142:78551] _______14</div><div class="line">2016-09-19 10:11:21.097 ThreadTest[3142:78551] _______15</div><div class="line">2016-09-19 10:11:21.097 ThreadTest[3142:78551] _______16</div><div class="line">2016-09-19 10:11:21.097 ThreadTest[3142:78551] _______17</div><div class="line">2016-09-19 10:11:21.098 ThreadTest[3142:78551] _______18</div><div class="line">2016-09-19 10:11:21.098 ThreadTest[3142:78551] _______19</div><div class="line">2016-09-19 10:11:21.099 ThreadTest[3142:78551] _______20</div></pre></td></tr></table></figure></p>
-<p>eg.2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">//创建并行队列</div><div class="line">    dispatch_queue_t queue3 =</div><div class="line">    dispatch_queue_create(&quot;com.quanya.queue&quot;, DISPATCH_QUEUE_CONCURRENT);</div><div class="line">    //创建异步任务，不阻塞当前线程</div><div class="line">    dispatch_async(queue3, ^&#123;</div><div class="line">        for (int i=0; i&lt;=10; i++) &#123;</div><div class="line">            NSLog(@&quot;_______%d&quot;,i);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">    NSLog(@&quot;aaaaa&quot;);</div><div class="line"></div><div class="line">    //创建异步任务，不阻塞当前线程</div><div class="line">    dispatch_async(queue3, ^&#123;</div><div class="line">        for (int i=11; i&lt;=20; i++) &#123;</div><div class="line">            NSLog(@&quot;_______%d&quot;,i);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">    NSLog(@&quot;bbbbb&quot;);</div></pre></td></tr></table></figure></p>
-<p>由下方打印结果可以看出dispatch_async会另开一个线程，不阻塞当前线程。而并行队列queue3则会导致另开线程中的任务并发执行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">2016-09-19 10:18:24.252 ThreadTest[3199:82172] aaaaa</div><div class="line">2016-09-19 10:18:24.252 ThreadTest[3199:82208] _______0</div><div class="line">2016-09-19 10:18:24.254 ThreadTest[3199:82172] bbbbb</div><div class="line">2016-09-19 10:18:24.254 ThreadTest[3199:82208] _______1</div><div class="line">2016-09-19 10:18:24.254 ThreadTest[3199:82210] _______11</div><div class="line">2016-09-19 10:18:24.254 ThreadTest[3199:82208] _______2</div><div class="line">2016-09-19 10:18:24.255 ThreadTest[3199:82210] _______12</div><div class="line">2016-09-19 10:18:24.255 ThreadTest[3199:82208] _______3</div><div class="line">2016-09-19 10:18:24.255 ThreadTest[3199:82210] _______13</div><div class="line">2016-09-19 10:18:24.255 ThreadTest[3199:82208] _______4</div><div class="line">2016-09-19 10:18:24.255 ThreadTest[3199:82210] _______14</div><div class="line">2016-09-19 10:18:24.256 ThreadTest[3199:82208] _______5</div><div class="line">2016-09-19 10:18:24.256 ThreadTest[3199:82210] _______15</div><div class="line">2016-09-19 10:18:24.256 ThreadTest[3199:82208] _______6</div><div class="line">2016-09-19 10:18:24.256 ThreadTest[3199:82210] _______16</div><div class="line">2016-09-19 10:18:24.256 ThreadTest[3199:82208] _______7</div><div class="line">2016-09-19 10:18:24.256 ThreadTest[3199:82210] _______17</div><div class="line">2016-09-19 10:18:24.257 ThreadTest[3199:82208] _______8</div><div class="line">2016-09-19 10:18:24.257 ThreadTest[3199:82210] _______18</div><div class="line">2016-09-19 10:18:24.257 ThreadTest[3199:82208] _______9</div><div class="line">2016-09-19 10:18:24.258 ThreadTest[3199:82210] _______19</div><div class="line">2016-09-19 10:18:24.258 ThreadTest[3199:82208] _______10</div><div class="line">2016-09-19 10:18:24.258 ThreadTest[3199:82210] _______20</div></pre></td></tr></table></figure></p>
-<p>eg.3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">//创建并行队列</div><div class="line">dispatch_queue_t queue3 =</div><div class="line">dispatch_queue_create(&quot;com.quanya.queue&quot;, DISPATCH_QUEUE_CONCURRENT);</div><div class="line">//创建异步任务，不阻塞当前线程</div><div class="line">dispatch_sync(queue3, ^&#123;</div><div class="line">    for (int i=0; i&lt;=10; i++) &#123;</div><div class="line">        NSLog(@&quot;_______%d&quot;,i);</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line">NSLog(@&quot;aaaaa&quot;);</div><div class="line"></div><div class="line">//创建异步任务，不阻塞当前线程</div><div class="line">dispatch_sync(queue3, ^&#123;</div><div class="line">    for (int i=11; i&lt;=20; i++) &#123;</div><div class="line">        NSLog(@&quot;_______%d&quot;,i);</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line">NSLog(@&quot;bbbbb&quot;);</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">//创建串行队列</div><div class="line">dispatch_queue_t queue2 =</div><div class="line">dispatch_queue_create(&quot;com.quanya.queue&quot;, DISPATCH_QUEUE_SERIAL);</div><div class="line">//创建异步任务，不阻塞当前线程</div><div class="line">dispatch_sync(queue2, ^&#123;</div><div class="line">    for (int i=0; i&lt;=10; i++) &#123;</div><div class="line">        NSLog(@&quot;_______%d&quot;,i);</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line">NSLog(@&quot;aaaaa&quot;);</div><div class="line"></div><div class="line">//创建异步任务，不阻塞当前线程</div><div class="line">dispatch_sync(queue2, ^&#123;</div><div class="line">    for (int i=11; i&lt;=20; i++) &#123;</div><div class="line">        NSLog(@&quot;_______%d&quot;,i);</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line">NSLog(@&quot;bbbbb&quot;);</div></pre></td></tr></table></figure>
-<p>上面两段代码的打印结果相同，如下所示。由此可以看出不管队列是串行和并行dispatch_sync都会阻塞当前线程。是否阻塞当前线程和队列无关，仅和任务有关。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">2016-09-19 10:23:05.241 ThreadTest[3283:85234] _______0</div><div class="line">2016-09-19 10:23:05.242 ThreadTest[3283:85234] _______1</div><div class="line">2016-09-19 10:23:05.242 ThreadTest[3283:85234] _______2</div><div class="line">2016-09-19 10:23:05.242 ThreadTest[3283:85234] _______3</div><div class="line">2016-09-19 10:23:05.243 ThreadTest[3283:85234] _______4</div><div class="line">2016-09-19 10:23:05.243 ThreadTest[3283:85234] _______5</div><div class="line">2016-09-19 10:23:05.243 ThreadTest[3283:85234] _______6</div><div class="line">2016-09-19 10:23:05.243 ThreadTest[3283:85234] _______7</div><div class="line">2016-09-19 10:23:05.243 ThreadTest[3283:85234] _______8</div><div class="line">2016-09-19 10:23:05.244 ThreadTest[3283:85234] _______9</div><div class="line">2016-09-19 10:23:05.244 ThreadTest[3283:85234] _______10</div><div class="line">2016-09-19 10:23:05.244 ThreadTest[3283:85234] aaaaa</div><div class="line">2016-09-19 10:23:05.244 ThreadTest[3283:85234] _______11</div><div class="line">2016-09-19 10:23:05.244 ThreadTest[3283:85234] _______12</div><div class="line">2016-09-19 10:23:05.245 ThreadTest[3283:85234] _______13</div><div class="line">2016-09-19 10:23:05.245 ThreadTest[3283:85234] _______14</div><div class="line">2016-09-19 10:23:05.245 ThreadTest[3283:85234] _______15</div><div class="line">2016-09-19 10:23:05.245 ThreadTest[3283:85234] _______16</div><div class="line">2016-09-19 10:23:05.245 ThreadTest[3283:85234] _______17</div><div class="line">2016-09-19 10:23:05.245 ThreadTest[3283:85234] _______18</div><div class="line">2016-09-19 10:23:05.246 ThreadTest[3283:85234] _______19</div><div class="line">2016-09-19 10:23:05.246 ThreadTest[3283:85234] _______20</div><div class="line">2016-09-19 10:23:05.246 ThreadTest[3283:85234] bobby</div></pre></td></tr></table></figure></p>
-<p>eg.4<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">        //创建队列组</div><div class="line">        dispatch_group_t group = dispatch_group_create();</div><div class="line">dispatch_queue_t queue3 =</div><div class="line">        //创建并行队列</div><div class="line">        dispatch_queue_create(&quot;com.quanya.queue&quot;, DISPATCH_QUEUE_CONCURRENT);</div><div class="line">        //创建异步任务，不阻塞当前线程</div><div class="line">        dispatch_group_async(group,queue3, ^&#123;</div><div class="line">            for (int i=0; i&lt;=10; i++) &#123;</div><div class="line">                NSLog(@&quot;_______%d&quot;,i);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        NSLog(@&quot;aaaaa&quot;);</div><div class="line"></div><div class="line">        //创建异步任务，不阻塞当前线程</div><div class="line">        dispatch_group_async(group,queue3, ^&#123;</div><div class="line">            for (int i=11; i&lt;=20; i++) &#123;</div><div class="line">                NSLog(@&quot;_______%d&quot;,i);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        //4.都完成后会自动通知</div><div class="line">        dispatch_group_notify(group, dispatch_get_main_queue(), ^&#123;</div><div class="line">            NSLog(@&quot;_______完成&quot;);</div><div class="line">        &#125;);</div><div class="line">        NSLog(@&quot;bbbbb&quot;);</div></pre></td></tr></table></figure></p>
-<p>以上是队列组dispatch_group_t的使用，在所有任务执行完时会调用dispatch_group_notify<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">2016-09-19 10:29:18.989 ThreadTest[3377:88634] aaaaa</div><div class="line">2016-09-19 10:29:18.989 ThreadTest[3377:88677] _______0</div><div class="line">2016-09-19 10:29:18.990 ThreadTest[3377:88677] _______1</div><div class="line">2016-09-19 10:29:18.991 ThreadTest[3377:88634] bbbbb</div><div class="line">2016-09-19 10:29:18.991 ThreadTest[3377:88679] _______11</div><div class="line">2016-09-19 10:29:18.991 ThreadTest[3377:88677] _______2</div><div class="line">2016-09-19 10:29:18.991 ThreadTest[3377:88679] _______12</div><div class="line">2016-09-19 10:29:18.991 ThreadTest[3377:88677] _______3</div><div class="line">2016-09-19 10:29:18.992 ThreadTest[3377:88679] _______13</div><div class="line">2016-09-19 10:29:18.992 ThreadTest[3377:88677] _______4</div><div class="line">2016-09-19 10:29:18.992 ThreadTest[3377:88679] _______14</div><div class="line">2016-09-19 10:29:18.993 ThreadTest[3377:88677] _______5</div><div class="line">2016-09-19 10:29:18.993 ThreadTest[3377:88679] _______15</div><div class="line">2016-09-19 10:29:18.993 ThreadTest[3377:88677] _______6</div><div class="line">2016-09-19 10:29:18.993 ThreadTest[3377:88679] _______16</div><div class="line">2016-09-19 10:29:18.993 ThreadTest[3377:88677] _______7</div><div class="line">2016-09-19 10:29:18.993 ThreadTest[3377:88679] _______17</div><div class="line">2016-09-19 10:29:18.993 ThreadTest[3377:88677] _______8</div><div class="line">2016-09-19 10:29:18.994 ThreadTest[3377:88679] _______18</div><div class="line">2016-09-19 10:29:18.995 ThreadTest[3377:88677] _______9</div><div class="line">2016-09-19 10:29:18.995 ThreadTest[3377:88679] _______19</div><div class="line">2016-09-19 10:29:18.995 ThreadTest[3377:88677] _______10</div><div class="line">2016-09-19 10:29:18.995 ThreadTest[3377:88679] _______20</div><div class="line">2016-09-19 10:29:19.089 ThreadTest[3377:88634] _______完成</div></pre></td></tr></table></figure></p>
-
-          
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/12/07/iOS多线程编程理解-GCD/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -620,57 +586,17 @@
 
       
         
-          
-            <p>码字不易，转载请注明出处。</p>
+          <p>码字不易，转载请注明出处。</p>
 <p>前言<br>iOS常用的持续集成工具有Jenkins、Travis CI、Xcode server等，当然我们选择最简单的Xcode server。</p>
 <p>OS X server中集成了git版本管理功能，Xcode server持续集成服务，还有wiki知识库管理等，你甚至还可以拿它搭建一个网站服务器。</p>
-<p>在持续集成过程中你可以直接使用os x server 的git版本管理功能，将代码提交至自己搭建的OS X server服务器。也可以将代码提交至其他git版本管理仓库中(比如GitHub)。</p>
-<p>设备<br>一台Git服务器，可以用GitHub、oschina等。</p>
-<p>一台装OS X Server的服务器，必须为MAC，下文简称 Xcode Server服务器。</p>
-<p>若干MAC做客户端，下文简称客户端。</p>
-<p>若干台iOS测试机。</p>
-<p>一、配置Xcode Server服务器<br>1、apple给开发者可以凭开发者账号免费兑换os x server。免费兑换地址</p>
-<p><a href="https://developer.apple.com/osx/download/" target="_blank" rel="external">https://developer.apple.com/osx/download/</a></p>
-<p>2、下载os x server后点击安装。</p>
-<p>3、打开 Server 应用，以查看 OS X Server 中提供的服务列表。选择“Xcode”。</p>
-<p>点按“选取 Xcode”按钮，然后在“应用程序”文件夹中选择“Xcode”。Xcode 服务将自动启动。</p>
-<p>4、开发者团队</p>
-<p>在此处千万不要添加开发者账号</p>
-<p>5、添加git存储库，如果用Github、oschina或者自己搭建的git服务器则不需要此步骤。</p>
-<p>Xcode 服务 Bot 将从源 Git 储存库访问项目和代码。</p>
-<p>点按“储存库”，然后点按 添加按钮。选取 Git 储存库的名称，然后点按“创建”。</p>
-<p>储存库的 URL 基于服务器主机名称和储存库名称。例如，储存库的 URL 将为 <a href="https://myserver.example.com/git/Mac_Calc.git。" target="_blank" rel="external">https://myserver.example.com/git/Mac_Calc.git。</a></p>
-<p>二、配置Xcode客户端，创建bot<br>1、打开xcode&gt;product&gt;create bot</p>
-<p>2、填写bot名称，选择Xcode Server服务器</p>
-<p>3、Actions：选择执行的动作</p>
-<p>   a、对代码进行静态分析</p>
-<p>   b、对代码进行单元测试</p>
-<p>   c、生成archive包（可以选择是否生成用户安装包）</p>
-<p>4、cleaning：选择在何时清理项目，有几个选项（总是、每天、每周、从不）</p>
-<p>5、configuration：选择编译配置（Debug、release）</p>
-<p>6、选择在何时Xcode Server服务器开始持续集成，有几个选项（定时、在有新代码提交时、手动）</p>
-<p>7、Before Integration 在开始持续集成前执行的脚本</p>
-<p>8、 After Integration在持续集成后执行的脚本</p>
-<p>9、至此，创建bot完成</p>
-<p>三、Xcode Server服务器证书配置</p>
-<p>1、配置Certificates</p>
-<p>打开钥匙串，将iPhone Developer: xxx和iPhone Distribution:xxx导出为.p12文件</p>
-<p>将导出的.p12文件 导入装OS X Server的MAC的钥匙串中，这次需导入到钥匙串系统中，而不是登录中</p>
-<p>持续集成生成包时证书由/usr/bin/codesign管理，所以需将codesign添加为允许访问证书的程序</p>
-<p>在显示简介中选择 访问控制 &gt;始终通过这些应用程序访问 中点击加号，开始选择/usr/bin/codesign程序。选择完成后点击确认。由于usr是隐藏文件，在选择时使用快捷键 CMD+SHIFT+. 显示隐藏文件</p>
-<p>按照以上步骤将iPhone Distribution:xxx的访问控制，也添加/usr/bin/codesign程序。</p>
-<p>2、将Provisioning Profiles拷贝到Xcode Server</p>
-<p>Xcode客户端描述文件保存在以下文件夹中</p>
-<p>User/Library/MobileDevice/ProvisioningProfiles</p>
-<p>Xcode Server服务器描述文件保存在以下文件夹中</p>
-<p>/Library/Developer/XcodeServer/ProvisioningProfiles</p>
-<p>将Xcode客户端路径下的证书保存至Xcode Server服务器对应路径下</p>
-<p>3、在上传代码到仓库时需选择正确的证书和描述文件，如下图</p>
-<p>四、开始持续集成<br>点击integrate开始持续集成</p>
-<p>正常情况等待几分钟会看到下面的界面，说明持续集成完成。可以将ipa包安装到手机，也可以将Archive上传到appStore。当然也可以直接用iPhone Safari访问xcode server进行安装。</p>
-<p>iOS Xcode server 持续集成（二）集成后ipa包自动上传蒲公英 集成前执行pod install</p>
-
-          
+<p>在持续集成过程中你可以直接使用os x server 的git版本管理功能，将代码提交至自己搭建的OS X server服务器。也可以将代码提交至其他git版本管理仓库中(比如GitHub)。<br>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/12/07/iOS-持续集成（一）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -873,10 +799,10 @@
 
           
             <div class="site-state-item site-state-tags">
-              
+              <a href="/tags">
                 <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -885,6 +811,26 @@
         
 
         <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/tianpengtao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/2e33ff1e028e/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
           
         </div>
 

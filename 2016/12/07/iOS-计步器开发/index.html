@@ -96,7 +96,7 @@
 
 对于使用了M7或者M8处理器的设备（iPhone5s、iPhone6、iPhone6 Plus、iPhone6s、iPhone6s Plus、），Core Motion框架支持了一些预置的motion动作，比如步数、爬楼还有移动类型(行走、骑行等等)。
 所以计步器的开发其实很简单，我们只需要用Core Motion框架">
-<meta property="og:updated_time" content="2016-12-09T03:47:03.000Z">
+<meta property="og:updated_time" content="2016-12-09T05:21:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS 计步器开发">
 <meta name="twitter:description" content="在微信运动、QQ健康等泛滥的年代，我们公司也终于要搞一个计步器，特此记录。
@@ -397,37 +397,20 @@
 <a id="more"></a>
 <h2 id="CMPedometer"><a href="#CMPedometer" class="headerlink" title="CMPedometer"></a>CMPedometer</h2><hr>
 <p>在iOS8及其以上系统中我们可以使用CMPedometer类获取行走相关信息（步数、距离、上楼、下楼、当前速度等）。</p>
-<p>当前设备是否可以获取步数</p>
-<ul>
-<li>(BOOL)isStepCountingAvailable;<br>当前设备是否可以获取距离</li>
-<li>(BOOL)isDistanceAvailable;<br>当前设备是否可以获取上下楼层数</li>
-<li>(BOOL)isFloorCountingAvailable;<br>当前设备是否可以获取速度（s/m）</li>
-<li>(BOOL)isPaceAvailable<br>当前设备是否可以获取节奏</li>
-<li>(BOOL)isCadenceAvailable<br>根据开始和结束时间查询行走相关信息</li>
-</ul>
-<ul>
-<li>(void)queryPedometerDataFromDate:(NSDate <em>)start<br>toDate:(NSDate </em>)end<br>withHandler:(CMPedometerHandler)handler;<br>从某一时刻开始监测步数变化</li>
-<li>(void)startPedometerUpdatesFromDate:(NSDate *)start<br>withHandler:(CMPedometerHandler)handler;<br>停止监测步数变化</li>
-<li>(void)stopPedometerUpdates;</li>
-</ul>
+<p>当前设备是否可以获取步数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+ (BOOL)isStepCountingAvailable;</div></pre></td></tr></table></figure></p>
+<p>当前设备是否可以获取距离<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+ (BOOL)isDistanceAvailable;</div></pre></td></tr></table></figure></p>
+<p>当前设备是否可以获取上下楼层数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+ (BOOL)isFloorCountingAvailable;</div></pre></td></tr></table></figure></p>
+<p>当前设备是否可以获取速度（s/m）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+ (BOOL)isPaceAvailable</div></pre></td></tr></table></figure></p>
+<p>当前设备是否可以获取节奏<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+ (BOOL)isCadenceAvailable</div></pre></td></tr></table></figure></p>
+<p>根据开始和结束时间查询行走相关信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (void)queryPedometerDataFromDate:(NSDate *)start</div><div class="line">toDate:(NSDate *)end</div><div class="line">withHandler:(CMPedometerHandler)handler;</div></pre></td></tr></table></figure></p>
+<p>从某一时刻开始监测步数变化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">- (void)startPedometerUpdatesFromDate:(NSDate *)start</div><div class="line">withHandler:(CMPedometerHandler)handler;</div></pre></td></tr></table></figure></p>
+<p>停止监测步数变化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (void)stopPedometerUpdates;</div></pre></td></tr></table></figure></p>
 <h2 id="CMStepCounter"><a href="#CMStepCounter" class="headerlink" title="CMStepCounter"></a>CMStepCounter</h2><hr>
 <p>在iOS7中我们只能使用CMStepCounter类获取步数，并且仅能够获取步数。</p>
-<p>判断步数统计是否有效</p>
-<ul>
-<li>(BOOL)isStepCountingAvailable;</li>
-</ul>
-<p>根据开始和结束时间查询步数</p>
-<ul>
-<li>(void)queryStepCountStartingFrom:(NSDate <em>)start<br>to:(NSDate </em>)end<br>toQueue:(NSOperationQueue *)queue<br>withHandler:(CMStepQueryHandler)handler;</li>
-</ul>
-<p>开始断监测步数变化</p>
-<ul>
-<li>(void)startStepCountingUpdatesToQueue:(NSOperationQueue *)queue<br>updateOn:(NSInteger)stepCounts<br>withHandler:(CMStepUpdateHandler)handler;</li>
-</ul>
-<p>停止监测步数变化</p>
-<ul>
-<li>(void)stopStepCountingUpdates;</li>
-</ul>
+<p>判断步数统计是否有效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+ (BOOL)isStepCountingAvailable;</div></pre></td></tr></table></figure></p>
+<p>根据开始和结束时间查询步数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (void)queryStepCountStartingFrom:(NSDate *)start</div><div class="line">to:(NSDate *)end</div><div class="line">toQueue:(NSOperationQueue *)queue</div><div class="line">withHandler:(CMStepQueryHandler)handler;</div></pre></td></tr></table></figure></p>
+<p>开始断监测步数变化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (void)startStepCountingUpdatesToQueue:(NSOperationQueue *)queue</div><div class="line">updateOn:(NSInteger)stepCounts</div><div class="line">withHandler:(CMStepUpdateHandler)handler;</div></pre></td></tr></table></figure></p>
+<p>停止监测步数变化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (void)stopStepCountingUpdates;</div></pre></td></tr></table></figure></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><hr>
 <p>综上我们可以看出CMPedometer类可以获取的运动信息更加详细。而CMStepCounter类仅能够获取步数。我们在使用中需要判断系统版本使用不同的类获取行走信息。</p>
 <p>我对CMPedometer 和CMStepCounter做了简单封装，使得你只需要一行代码就可以获取及监测行走信息。  <a href="https://github.com/tianpengtao/Pedometer.git" target="_blank" rel="external">代码奉上</a></p>
